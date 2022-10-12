@@ -4,6 +4,7 @@ const http     = require('http');
 const socketio = require('socket.io');
 const path     = require('path');
 const Sockets  = require('./sockets');
+const dbConection = require('../database/config');
 
 class Server {
 
@@ -12,6 +13,9 @@ class Server {
         this.app  = express();
         this.port = process.env.PORT;
 
+        //connect to Database
+        dbConection()
+        
         // Http server
         this.server = http.createServer( this.app );
         
@@ -22,6 +26,10 @@ class Server {
     middlewares() {
         // Desplegar el directorio público
         this.app.use( express.static( path.resolve( __dirname, '../public' ) ) );
+        //TODO: habilitar cors
+        
+        //API endPoints
+        this.app.use('/api/users', require('../router/auth'))
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase
