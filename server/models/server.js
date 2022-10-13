@@ -1,10 +1,11 @@
 // Servidor de Express
-const express  = require('express');
-const http     = require('http');
-const socketio = require('socket.io');
-const path     = require('path');
-const Sockets  = require('./sockets');
+const express     = require('express');
+const cors        = require('cors')
 const dbConection = require('../database/config');
+const http        = require('http');
+const socketio    = require('socket.io');
+const Sockets     = require('./sockets');
+const path        = require('path');
 
 class Server {
 
@@ -27,9 +28,13 @@ class Server {
         // Desplegar el directorio público
         this.app.use( express.static( path.resolve( __dirname, '../public' ) ) );
         //TODO: habilitar cors
-        
+        // parse body
+        this.app.use(express.json())
+        //CORS
+        this.app.use(cors())
         //API endPoints
         this.app.use('/api/users', require('../router/auth'))
+        this.app.use('/api/messages', require('../router/message'))
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase

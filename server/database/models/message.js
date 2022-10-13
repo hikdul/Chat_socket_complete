@@ -24,7 +24,7 @@ const MessageSchema = Schema({
     timestamps: true
 })
 
-UserSchema.method('toJSON', function(){
+MessageSchema.method('toJSON', function(){
     const{__v, ...object} = this.object();
 })
 
