@@ -23,9 +23,7 @@ class Sockets {
             await userConnect(uid)
 
             //TODO: emitir todos los usuarios conectados
-            let culo= await getUsers()
-            console.log(culo)
-            this.io.emit('list-users',{culo})// await getUsers())
+            this.io.emit('list-users',await getUsers())
             
             
             //TODO: socket join, unirme a una sala especifica... unir socket a una sala rcon el mismo id
@@ -38,9 +36,9 @@ class Sockets {
                 this.io.emit('mensaje-from-server', data);
             });
 
-            socket.on('disconnect', () => {
+            socket.on('disconnect', async () => {
                 userDisconnect(uid)
-                console.log('Disconect Client', {uid})
+                this.io.emit('list-users',await getUsers())
             })
         });
     }

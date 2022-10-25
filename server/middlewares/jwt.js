@@ -8,8 +8,9 @@ const validJWT = (req, res, next) =>{
             return res.status(401).json({ok:false, message: 'Not Valid Token'})
 
         const {uid}= jwt.verify(tk,JWT_KEY)
+        console.log({uid: uid})
         req.uid = uid
-
+        
         next()
     }
     catch (error)

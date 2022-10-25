@@ -25,7 +25,8 @@ const MessageSchema = Schema({
 })
 
 MessageSchema.method('toJSON', function(){
-    const{__v, ...object} = this.object();
+    const{__v, ...object} = this.toObject();
+    return object
 })
 
 module.exports= model('Message',MessageSchema)
