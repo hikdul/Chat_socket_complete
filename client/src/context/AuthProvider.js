@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', token)
             setAuth({
                 uid: user.id,
-                checking: false,
                 logged: true,
                 name: user.name,
                 email: user.email
@@ -81,9 +80,9 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             auth,
             login,
+            logout,
             register,
             verifyToken,
-            logout,
         }}>
             {children}
         </AuthContext.Provider>

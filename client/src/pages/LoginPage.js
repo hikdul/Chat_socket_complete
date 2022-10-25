@@ -16,7 +16,7 @@ export const LoginPage = () => {
         const {name, value} = target
         setForm({...form,[name]:value})
     }
-    
+
     const toggleCheck = () =>{
         setForm({...form, rememberme:!form.rememberme})
     }
