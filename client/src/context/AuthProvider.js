@@ -1,12 +1,15 @@
-import { useCallback, useState } from "react"
+import { useCallback, useContext, useState } from "react"
+import { initialStateReducer } from "../constants/initState"
 import { fetchNoToken, fetchToken } from "../helpers/fetch"
+import { types } from "../types/types"
 import { EMPTYSTATE, INITIALSTATE } from "./Authconstants"
 import { AuthContext } from "./AuthContext"
+import ChatContext from "./chat/ChatContext"
 
 export const AuthProvider = ({ children }) => {
 
     const [auth, setAuth] = useState(INITIALSTATE)
-
+    const {dispatch} = useContext(ChatContext)
     const login = async (email, password) => {
 
         const resp = await fetchNoToken('users/login', { email, password }, 'POST')
@@ -73,6 +76,10 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('token')
+        dispatch({
+            types: types.cleanSes,
+            payload: initialStateReducer
+        })
         setAuth(EMPTYSTATE)
     }
 

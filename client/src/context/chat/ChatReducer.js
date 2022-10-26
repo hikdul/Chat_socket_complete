@@ -1,9 +1,8 @@
-
 import { types } from '../../types/types';
 
 export const chatReducer = (state, action) =>{
-    switch(action.type){
-        
+    switch(action.type)
+    {
         case types.usersLoad:
             return{
                 ...state,
@@ -31,6 +30,11 @@ export const chatReducer = (state, action) =>{
             ...state,
             mensegges: [...action.payload]
            }
+        
+        case types.cleanSes:
+            return{
+                ...action.payload
+            }
         
         default:
                 return state

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import ChatContext from "../context/chat/ChatContext"
 import { fetchToken } from "../helpers/fetch"
 import { scrollToBottom } from "../helpers/scrollToButtom"
