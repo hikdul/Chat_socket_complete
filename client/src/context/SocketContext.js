@@ -4,6 +4,7 @@ import { useSocket } from '../hooks/useSocket'
 import { AuthContext } from './AuthContext';
 import ChatContext from './chat/ChatContext';
 import { types } from '../types/types';
+import { scrollToBottomBeuty } from '../helpers/scrollToButtom';
 
 export const SocketContext = createContext();
 
@@ -31,6 +32,17 @@ export const SocketProvider = ({ children }) => {
             payload: users,
         })
       }) 
+    },[socket, dispatch])
+    
+    useEffect(()=>{
+        socket?.on('mensaje-personal', payload =>{
+            console.log('escucho mensaje-personal', payload)
+            dispatch({
+                type: types.newMessage,
+                payload: payload
+            })
+            scrollToBottomBeuty('messageBox')
+        })
     },[socket, dispatch])
 
     return (

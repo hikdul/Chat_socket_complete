@@ -24,8 +24,6 @@ export const LoginPage = () => {
     const onSubmit = async ev =>{
         ev.preventDefault()
         const {email, password} = form
-        console.log({email,password})
-         
         if(!await login(email,password))
             swal.fire('Error', 'verifique Usuario y contrasena', 'error')
         // si es correcta... debe de ir al log 

@@ -1,12 +1,16 @@
 import React from 'react'
+import { horaMes } from '../helpers/configHoraMes'
 
-export const OutgoingMessage = () => {
+export const OutgoingMessage = (props) => {
+
+    const {message,createdAt } = props.msg
+    const date = horaMes(createdAt)
+
     return (
         <div className="outgoing_msg">
             <div className="sent_msg">
-                <p>Test which is a new approach to have all
-                    solutions</p>
-                <span className="time_date"> 11:01 AM | June 9</span>
+                <p>{message}</p>
+                <span className="time_date"> {date} </span>
             </div>
         </div>
     )

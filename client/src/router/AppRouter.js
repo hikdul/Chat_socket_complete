@@ -10,7 +10,6 @@ import { PrivateRoute } from './privateRoute';
 export const AppRouter = () => {
 
     const { auth, verifyToken } = useContext(AuthContext)
-    console.log({ auth })
     useEffect(() => { verifyToken() }, [verifyToken])
 
     if (auth.checking)

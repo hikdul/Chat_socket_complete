@@ -8,9 +8,10 @@ export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(INITIALSTATE)
 
     const login = async (email, password) => {
+
         const resp = await fetchNoToken('users/login', { email, password }, 'POST')
         const { token, user } = resp
-        console.log({ token, user })
+
         if (token) {
             localStorage.setItem('token', token)
             setAuth({

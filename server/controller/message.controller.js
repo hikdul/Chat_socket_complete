@@ -13,7 +13,7 @@ const listMessage = async (req,res,next) =>{
             {from: otherId, to: meId}
         ]
     })
-        .sort({createAt:'desc'})
+        .sort({createAt:'asc'})
         .limit(30)
     
 

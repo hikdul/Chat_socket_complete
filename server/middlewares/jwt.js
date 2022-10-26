@@ -3,7 +3,9 @@ const { JWT_KEY } = require('../config')
 
 const validJWT = (req, res, next) =>{
     try {
+
         const tk = req.header('x-token')
+
         if(!tk)
             return res.status(401).json({ok:false, message: 'Not Valid Token'})
 

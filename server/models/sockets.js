@@ -1,4 +1,4 @@
-const { userConnect,userDisconnect, getUsers } = require("../controller/socket.controller");
+const { userConnect,userDisconnect, getUsers, saveMessage } = require("../controller/socket.controller");
 const { VerifyJWT } = require("../helpers/jwt/jwt");
 
 class Sockets {
@@ -19,9 +19,17 @@ class Sockets {
             }
 
             // Escuchar evento: mensaje-to-server
-            console.log('Cliente Conectado...', {uid})
+            //console.log('Cliente Conectado...', {uid})
             await userConnect(uid)
-
+            // ** unir al usuario a una sala de socket.io
+            socket.join(uid)
+            //mensaje-personal
+            socket.on('mensaje-personal', async(payload) =>{
+                const msg = await saveMessage(payload)
+                this.io.to(payload.from).emit('mensaje-personal', msg)
+                this.io.to(payload.to).emit('mensaje-personal', msg)
+            })
+            
             //TODO: emitir todos los usuarios conectados
             this.io.emit('list-users',await getUsers())
             
