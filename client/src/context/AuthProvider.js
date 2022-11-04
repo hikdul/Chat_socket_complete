@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
         const { token, user } = resp
 
         if (token) {
-            localStorage.setItem('token', token)
+            localStorage.setItem('token', API)
             setAuth({
                 uid: user.id,
                 checking: false,

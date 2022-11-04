@@ -10,9 +10,10 @@ import { PrivateRoute } from './privateRoute';
 export const AppRouter = () => {
 
     const { auth, verifyToken } = useContext(AuthContext)
-    useEffect(() => { verifyToken() }, [verifyToken])
 
-    if (auth.checking)
+    useEffect(() => { verifyToken() }, [])
+
+    if (!auth.checking)
         return <h1>please wait...</h1>
 
     return (
@@ -20,7 +21,7 @@ export const AppRouter = () => {
             <div>
                 <Switch>
                     {/* <Route path="/auth" component={AuthRouter} />*/}
-                    <PublcRoute isAuth={auth.logged} path="/auth" component={AuthRouter}  />
+                   <PublcRoute isAuth={auth.logged} path="/auth" component={AuthRouter}  />
                     {/*<Route exact path="/" component={ChatPage} />*/}
                     <PrivateRoute isAuth={auth.logged} path="/" component={ChatPage}/>
 
